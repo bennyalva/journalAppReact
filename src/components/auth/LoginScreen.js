@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
-import { useDispatch } from 'react-redux'
-import { login } from '../../actions/auth'
+import { useDispatch, useSelector } from 'react-redux'
+import { startLoginEmailPassWord, startGoogleLogin } from '../../actions/auth'
 
 export const LoginScreen = () => {
+    const { loading } = useSelector(state => state.ui);
     const dispatch = useDispatch();
     const [formValues, handlerInputChanges] = useForm({
         email: 'benny@gmail.com',
@@ -15,9 +16,11 @@ export const LoginScreen = () => {
 
     const handlerLogin = (e) => {
         e.preventDefault();
-        dispatch(login(12345, 'Benny'));
+        dispatch(startLoginEmailPassWord(email, password));
     }
-
+    const handlerGoogleLogin = () => {
+        dispatch(startGoogleLogin());
+    }
     return (
         <>
             <h3 className="auth__title">Login</h3>
@@ -40,7 +43,8 @@ export const LoginScreen = () => {
                 />
                 <button
                     className="btn btn-primary btn-block"
-                    type="submit">
+                    type="submit"
+                    disabled={ loading }>
                     Login
                 </button>
                 <hr />
@@ -48,6 +52,7 @@ export const LoginScreen = () => {
                     <p>Login with social networks</p>
                     <div 
                             className="google-btn"
+                            onClick={handlerGoogleLogin}
                         >
                             <div className="google-icon-wrapper">
                                 <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
