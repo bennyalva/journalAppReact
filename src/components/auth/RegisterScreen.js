@@ -43,7 +43,8 @@ export const RegisterScreen = () => {
     return (
         <>
         <h3 className="auth__title">Register</h3>
-        <form onSubmit={ handlerSubmitRegister }>
+        <form onSubmit={ handlerSubmitRegister }
+            className="animate__animated animate__fadeIn animate_faster">
             {
                 msgError && (
                    <div className="auth__alert-error">
