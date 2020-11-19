@@ -43,7 +43,8 @@ export const LoginScreen = () => {
                     onChange={ handlerInputChanges }
                 />
                 <button
-                    className="btn btn-primary btn-block"
+                    id="btn-login"
+                    className="btn btn-primary btn-block btn-login-test"
                     type="submit"
                     disabled={ loading }>
                     Login

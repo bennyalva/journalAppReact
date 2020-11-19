@@ -7,7 +7,8 @@ import { noteLogout } from "./notes";
 export const startLoginEmailPassWord = (email, password) => {
     
     return (dispatch) => {
-            dispatch(startLoading());
+            dispatch(startLoading()); // este dispatch es el unico que se regresa cuando se hace testitng
+            // para que los otros dipatch se muestren en el testing se agrega un return en firebase
             firebase.auth().signInWithEmailAndPassword(email, password)
             .then( ({user}) => {
                 dispatch(login(user.uid, user.displayName));
@@ -32,7 +33,7 @@ export const startReigisteredUser = (email, password, name) =>{
     }
 }
 export const startGoogleLogin = () => {
-    return (dispatch) => {
+    return (dispatch) => { /// cuando hacemos el return y va dentro los dispacth se puede ver cuando se hacemos testing
         firebase.auth().signInWithPopup( googleAuthProvider)
         .then( ({user}) => {
            dispatch(login(user.uid, user.displayName)) 

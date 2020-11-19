@@ -1,0 +1,15 @@
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import {createSerializer} from 'enzyme-to-json';
+ 
+expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
+Enzyme.configure({ adapter: new Adapter() });
+
+const noScroll = () => {};
+Object.defineProperty(window, 'scrollTo', { value: noScroll, writable: true}); // to solve error on window scroll to
+jest.mock('sweetalert2', () => ( // to resolve error on query selector
+    {
+        fire: jest.fn(),
+        close: jest.fn()
+    }
+))
